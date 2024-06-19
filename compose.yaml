@@ -1,0 +1,90 @@
+x-environment:
+  &default-environment
+  DJANGO_DEBUG: "${DJANGO_DEBUG:-false}"
+  DJANGO_ALLOWED_HOSTS: "${DJANGO_ALLOWED_HOSTS:-}"
+  DJANGO_CSRF_TRUSTED_ORIGINS: "${DJANGO_CSRF_TRUSTED_ORIGINS:-}"
+
+services:
+  wallet:
+    build:
+      context: ./wallet
+      target: webapp
+    environment:
+      <<: *default-environment
+    env_file: ./configs/default.env
+    volumes:
+      - staticfiles:/staticfiles
+    secrets:
+      - django-secret
+      - db-host
+      - db-name
+      - db-user
+      - db-password
+    depends_on:
+      - postgres
+
+  worker:
+    build:
+      context: ./wallet
+      target: worker
+    environment:
+      <<: *default-environment
+    env_file: ./configs/default.env
+    secrets:
+      - django-secret
+      - db-host
+      - db-name
+      - db-user
+      - db-password
+
+  transaction-service:
+    build: ./transaction-service
+
+  nginx:
+    image: nginx:1.27-alpine-slim
+    volumes:
+      - staticfiles:/usr/share/nginx/html/staticfiles
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+    depends_on:
+      - wallet
+
+  postgres:
+    image: postgres:16.3-alpine
+    env_file: ./configs/default.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    secrets:
+      - db-user
+      - db-name
+      - db-host
+      - db-password
+
+  cache:
+    image: redis:7-alpine
+
+  broker:
+    image: redis:7-alpine
+
+volumes:
+  staticfiles:
+  postgres_data:
+
+secrets:
+  db-user:
+    file: ./secrets/db-user.txt
+  db-name:
+    file: ./secrets/db-name.txt
+  db-host:
+    file: ./secrets/db-host.txt
+  db-password:
+    file: ./secrets/db-password.txt
+  django-secret:
+    file: ./secrets/django-secret.txt
+
+configs:
+  nginx_conf:
+    file: ./configs/nginx.conf
