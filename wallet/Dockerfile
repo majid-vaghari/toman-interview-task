@@ -27,14 +27,10 @@ USER runner
 
 EXPOSE 8000/tcp
 
-ENTRYPOINT [ "daphne" ]
-
-CMD [ "-b", "0.0.0.0", "-p", "8000", "wallet.asgi:application" ]
+CMD [ "daphne", "-b", "0.0.0.0", "-p", "8000", "wallet.asgi:application" ]
 
 FROM service AS worker
 
 USER runner
 
-ENTRYPOINT [ "celery" ]
-
-CMD [ "worker" ]
+CMD [ "celery", "-A", "wallet", "worker", "-l", "info" ]

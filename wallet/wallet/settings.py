@@ -159,4 +159,17 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.DjangoModelPermissions'
         'rest_framework.permissions.AllowAny'
     ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_BROKER_CONNECTION_RETRY = True
+CELERY_BROKER_CHANNEL_ERROR_RETRY = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BROKER_CONNECTION_MAX_RETRIES = None # retry forever
+
+CELERY_CACHE_BACKEND = 'django-cache'
+
+# timezone
+CELERY_TIMEZONE = 'Asia/Tehran'

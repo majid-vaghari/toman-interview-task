@@ -2,12 +2,14 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY . .
+COPY --chmod=0755 . .
 
 RUN pip install -r requirements.txt
 
+RUN useradd --create-home runner
+
+USER runner
+
 EXPOSE 8010
 
-ENTRYPOINT [ "daphne" ]
-
-CMD [ "-b 0.0.0.0", "-p 8010", "app:asgi_app" ]
+CMD [ "daphne", "-b", "0.0.0.0", "-p", "8010", "app:asgi_app" ]
