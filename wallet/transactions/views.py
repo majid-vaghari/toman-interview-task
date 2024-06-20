@@ -7,7 +7,6 @@ from rest_framework.response import Response
 
 from .models import Wallet, Transaction
 from .serializers import WalletSerializer, DepositSerializer, WithdrawRequestSerializer
-from .tasks import process_withdrawal
 
 
 class WalletViewSet(mixins.CreateModelMixin,
@@ -50,8 +49,6 @@ class WalletViewSet(mixins.CreateModelMixin,
                 t.save()
         except Exception as e:
             return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-
 
         headers = self.get_success_headers({'uuid': pk})
         wallet = self.get_queryset().get(uuid=pk)

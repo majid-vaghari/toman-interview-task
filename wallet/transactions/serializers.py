@@ -1,11 +1,12 @@
 from decimal import Decimal
 
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from rest_framework import serializers
 
 from .models import Transaction, Wallet
-from .validators import validate_positive_amount, validate_future_date
+from .validators import validate_positive_amount, FutureDateValidator
 
 
 class TransactionNestedSerializer(serializers.HyperlinkedModelSerializer):
@@ -57,7 +58,7 @@ class WithdrawRequestSerializer(serializers.Serializer):
         label=_('Scheduled Time'),
         help_text=_('The scheduled time of the withdrawal.'),
         validators=[
-            validate_future_date,
+            FutureDateValidator(minutes=1),
         ]
     )
     target = serializers.UUIDField(

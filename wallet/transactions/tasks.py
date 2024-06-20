@@ -155,11 +155,18 @@ def save_objects(sender: Wallet, receiver: Wallet, transaction: Transaction) -> 
             obj.save()
 
     except Exception as e:
+        # if celery result backend retry policy is configured in the future
+        # this message should be updated to notify this withdrawal process
+        # will be retried (probably :D)
         logger.critical(
             "Unexpected error occurred while saving objects: %s. "
             "Transaction ID: %s. "
-            "Can't recover. This will probably lead to data loss.",
+            "Can't recover.",
             e,
             transaction.uuid,
         )
+        # reraising the exception here will make sure
+        # the transaction will be marked as failed
+        # and it will rollback the transaction
+        # so there's no data loss
         raise e

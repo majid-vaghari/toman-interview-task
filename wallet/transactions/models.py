@@ -1,14 +1,13 @@
 import uuid
 
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from django.db import models
-from django.db import transaction
+from django.db import models, transaction
+from django.db.models import Q, F
 
 from .validators import (
     validate_positive_amount,
     validate_non_negative_amount,
-    validate_future_date
+    FutureDateValidator,
 )
 
 
@@ -97,6 +96,16 @@ class Wallet(UUIDModel, TimeStampedModel):
         verbose_name = _("Wallet")
         verbose_name_plural = _("Wallets")
 
+        constraints = [
+            models.CheckConstraint(
+                check=Q(balance__gte=0),
+                name="positive_balance",
+                violation_error_message=_(
+                    "The balance must always be positive. Got %(show_value)s."
+                ),
+            ),
+        ]
+
 
 class Transaction(UUIDModel, TimeStampedModel):
     class Status(models.TextChoices):
@@ -131,7 +140,7 @@ class Transaction(UUIDModel, TimeStampedModel):
         verbose_name=_("Scheduled Time"),
         help_text=_("The scheduled time of the transaction."),
         validators=[
-            validate_future_date,
+            FutureDateValidator(),
         ],
     )
     status = models.CharField(
@@ -156,12 +165,23 @@ class Transaction(UUIDModel, TimeStampedModel):
     def __repr__(self):
         return f'Transaction<uuid={self.uuid}, from={self.sender}, to={self.receiver}, amount={self.amount}, scheduled_time={self.scheduled_time}, status={self.status}>'
 
-    def clean(self) -> None:
-        super().clean()
-
-        if self.sender == self.receiver:
-            raise ValidationError(_("Sender and receiver cannot be the same."))
-
     class Meta:
         verbose_name = _("Transaction")
         verbose_name_plural = _("Transactions")
+
+        constraints = [
+            models.CheckConstraint(
+                check=Q(amount__gte=0),
+                name="positive_amount",
+                violation_error_message=_(
+                    "The amount must be positive. Got %(show_value)s."
+                ),
+            ),
+            models.CheckConstraint(
+                check=~Q(sender=F('receiver')),
+                name="sender_and_receiver_are_different",
+                violation_error_message=_(
+                    "Sender and receiver cannot be the same."
+                ),
+            ),
+        ]

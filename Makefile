@@ -29,6 +29,6 @@ delete-images:
 clean:
 	docker compose down --volumes --rmi local
 
-migrate-db:
-	docker compose exec wallet python manage.py migrate
+migrate-db: ## wait for services to be up and then run migrations
+	docker compose exec wallet python manage.py migrate || sleep 2 && docker compose exec wallet python manage.py migrate
 
