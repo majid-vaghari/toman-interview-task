@@ -20,6 +20,7 @@ services:
       - db-name
       - db-user
       - db-password
+      - sentry-key
     depends_on:
       - postgres
 
@@ -36,6 +37,7 @@ services:
       - db-name
       - db-user
       - db-password
+      - sentry-key
 
   transaction:
     build: ./transaction-service
@@ -84,6 +86,8 @@ secrets:
     file: ./secrets/db-password.txt
   django-secret:
     file: ./secrets/django-secret.txt
+  sentry-key:
+    file: ./secrets/sentry-key.txt
 
 configs:
   nginx_conf:

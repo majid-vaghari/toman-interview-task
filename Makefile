@@ -11,6 +11,8 @@ secrets:
 	echo walletdb > secrets/db-name.txt
 	echo walletuser > secrets/db-user.txt
 
+	touch secrets/sentry-key.txt
+
 .env:
 	cp dev.env .env
 

@@ -22,4 +22,5 @@ from transactions.urls import router
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('transactions.urls')),
+    path('error', lambda r: 1/0)
 ]
