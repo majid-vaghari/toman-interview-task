@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-06-21 00:58+0330\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: transactions/models.py:18
+msgid "Created"
+msgstr "ایجاد"
+
+#: transactions/models.py:19
+msgid "The date and time when this object was created."
+msgstr "تاریخ و زمان ایجاد این شیء."
+
+#: transactions/models.py:23
+msgid "Updated"
+msgstr "به‌روزرسانی"
+
+#: transactions/models.py:24
+msgid "The date and time when this object was last updated."
+msgstr "تاریخ و زمان آخرین به‌روزرسانی این شیء."
+
+#: transactions/models.py:36
+msgid "UUID"
+msgstr "شناسه"
+
+#: transactions/models.py:37
+msgid "A unique identifier for this object."
+msgstr "یک شناسه یکتا برای این شیء."
+
+#: transactions/models.py:49
+msgid "Balance"
+msgstr "موجودی"
+
+#: transactions/models.py:50
+msgid "The current balance of the wallet."
+msgstr "موجودی فعلی کیف پول."
+
+#: transactions/models.py:96
+msgid "Wallet"
+msgstr "کیف پول"
+
+#: transactions/models.py:97
+msgid "Wallets"
+msgstr "کیف‌های پول"
+
+#: transactions/models.py:104
+#, python-format
+msgid "The balance must always be positive. Got %(show_value)s."
+msgstr "موجودی باید همیشه مثبت باشد. مقدار دریافت شده %(show_value)s."
+
+#: transactions/models.py:112
+msgid "Pending"
+msgstr "در انتظار"
+
+#: transactions/models.py:113
+msgid "Success"
+msgstr "موفقیت‌آمیز"
+
+#: transactions/models.py:114
+msgid "Failed"
+msgstr "ناموفق"
+
+#: transactions/models.py:120
+msgid "Sender Wallet"
+msgstr "فرستنده"
+
+#: transactions/models.py:121
+msgid "The wallet from which the transaction is made."
+msgstr "کیف پولی که تراکنش از آن انجام شده است."
+
+#: transactions/models.py:127
+msgid "Receiver Wallet"
+msgstr "گیرنده"
+
+#: transactions/models.py:128
+msgid "The wallet to which the transaction is made."
+msgstr "کیف پولی که تراکنش به آن انجام شده است."
+
+#: transactions/models.py:133 transactions/serializers.py:38
+#: transactions/serializers.py:51
+msgid "Amount"
+msgstr "مقدار"
+
+#: transactions/models.py:134
+msgid "The amount of the transaction."
+msgstr "مقدار تراکنش."
+
+#: transactions/models.py:140 transactions/serializers.py:58
+msgid "Scheduled Time"
+msgstr "زمان برنامه‌ریزی شده"
+
+#: transactions/models.py:141
+msgid "The scheduled time of the transaction."
+msgstr "زمان برنامه‌ریزی شده تراکنش."
+
+#: transactions/models.py:151
+msgid "Status"
+msgstr "وضعیت"
+
+#: transactions/models.py:152
+msgid "The status of the transaction."
+msgstr "وضعیت تراکنش."
+
+#: transactions/models.py:158
+msgid "Error Message"
+msgstr "پیام خطا"
+
+#: transactions/models.py:159
+msgid "The error message if the transaction failed."
+msgstr "پیام خطا در صورت ناموفق بودن تراکنش."
+
+#: transactions/models.py:169
+msgid "Transaction"
+msgstr "تراکنش"
+
+#: transactions/models.py:170
+msgid "Transactions"
+msgstr "تراکنش‌ها"
+
+#: transactions/models.py:177
+#, python-format
+msgid "The amount must be positive. Got %(show_value)s."
+msgstr "مقدار باید مثبت باشد. مقدار دریافت شده %(show_value)s."
+
+#: transactions/models.py:184
+msgid "Sender and receiver cannot be the same."
+msgstr "فرستنده و گیرنده نمی‌توانند یکسان باشند."
+
+#: transactions/serializers.py:39
+msgid "The amount of the deposit."
+msgstr "مقدار سپرده."
+
+#: transactions/serializers.py:52
+msgid "The amount of the withdrawal."
+msgstr "مقدار برداشت."
+
+#: transactions/serializers.py:59
+msgid "The scheduled time of the withdrawal."
+msgstr "زمان برنامه‌ریزی شده برداشت."
+
+#: transactions/serializers.py:65
+msgid "Target"
+msgstr "هدف"
+
+#: transactions/serializers.py:66
+msgid "The wallet to which the withdrawal is made."
+msgstr "کیف پولی که برداشت به آن انجام شده است."
+
+#: transactions/serializers.py:72
+msgid "You cannot create a withdraw request to yourself."
+msgstr "نمی‌توانید درخواست برداشت به خودتان ایجاد کنید."
+
+#: transactions/tasks.py:120
+#, python-format
+msgid ""
+"Transaction cannot be processed before the scheduled time. Try after "
+"%(time_remaining)s seconds."
+msgstr "تراکنش نمی‌تواند قبل از زمان‌بندی پردازش شود. پس از %(time_remaining)s ثانیه تلاش کنید."
+
+#: transactions/tasks.py:128
+#, python-format
+msgid ""
+"Insufficient funds. Available balance: %(available_balance)s. Required "
+"amount: %(required_amount)s."
+msgstr "موجودی ناکافی. موجودی فعلی: %(available_balance)s. مقدار مورد نیاز: %(required_amount)s."
+
+#: transactions/validators.py:12
+#, python-format
+msgid "Positive value required, got %(show_value)s."
+msgstr "مقدار مثبت مورد نیاز است، مقدار دریافت شده %(show_value)s."
+
+#: transactions/validators.py:19
+#, python-format
+msgid "Non-negative value required, got %(show_value)s."
+msgstr "مقدار غیر منفی مورد نیاز است، مقدار دریافت شده %(show_value)s."
+
+#: transactions/validators.py:30
+#, python-format
+msgid ""
+"Date must be in the future. Got %(show_value)s. Current time: "
+"%(limit_value)s."
+msgstr "تاریخ باید در آینده باشد. مقدار دریافت شده %(show_value)s. زمان فعلی: %(limit_value)s."
+
+#: transactions/validators.py:34
+#, python-format, python-brace-format
+msgid ""
+"Date must be at least {seconds} seconds in the future. Got %(show_value)s. "
+"Current time: %(limit_value)s."
+msgstr "تاریخ باید حداقل {seconds} ثانیه در آینده باشد. مقدار دریافت شده %(show_value)s. زمان فعلی: %(limit_value)s."

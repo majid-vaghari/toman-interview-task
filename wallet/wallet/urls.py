@@ -17,10 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from transactions.urls import router
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('transactions.urls')),
-    path('error', lambda r: 1/0)
 ]

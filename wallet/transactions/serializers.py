@@ -10,6 +10,14 @@ from .validators import validate_positive_amount, FutureDateValidator
 
 
 class TransactionNestedSerializer(serializers.HyperlinkedModelSerializer):
+    amount = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        localize=True,
+        read_only=True,
+        label=_('Amount'),
+        help_text=_('The amount of the transaction.'),
+    )
     class Meta:
         model = Transaction
         fields = ['uuid', 'amount', 'scheduled_time',
@@ -17,6 +25,15 @@ class TransactionNestedSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class WalletSerializer(serializers.HyperlinkedModelSerializer):
+    balance = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        localize=True,
+        read_only=True,
+        label=_('Balance'),
+        help_text=_('The balance of the wallet.'),
+    )
+    
     outgoing_transactions = TransactionNestedSerializer(
         many=True, read_only=True)
     incoming_transactions = TransactionNestedSerializer(

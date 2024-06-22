@@ -21,7 +21,10 @@ COPY --chmod=0755 . .
 
 FROM service AS webapp
 
+RUN apt-get update && apt-get install -y gettext
+
 RUN [ "python", "./manage.py", "collectstatic" ]
+RUN [ "python", "./manage.py", "compilemessages" ]
 
 USER runner
 

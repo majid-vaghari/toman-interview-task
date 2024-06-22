@@ -29,7 +29,7 @@ class WalletViewSet(mixins.CreateModelMixin,
 
         headers = self.get_success_headers({'uuid': pk})
         wallet = self.get_queryset().get(uuid=pk)
-        serializer = WalletSerializer(wallet)
+        serializer = WalletSerializer(wallet, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
 
     @action(detail=True, methods=['post'], serializer_class=WithdrawRequestSerializer)

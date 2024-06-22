@@ -34,3 +34,5 @@ clean:
 migrate-db: ## wait for services to be up and then run migrations
 	docker compose exec wallet python manage.py migrate || sleep 2 && docker compose exec wallet python manage.py migrate
 
+create-superuser:
+	docker compose exec wallet python manage.py createsuperuser
