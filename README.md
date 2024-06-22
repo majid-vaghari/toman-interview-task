@@ -394,9 +394,9 @@ docker-compose exec wallet python manage.py test
 ### Test Coverage
 
 The tests cover:
-- [ ] **Model Tests:** Ensure correct creation and validation of models.
-- [ ] **View Tests:** Verify that API endpoints respond correctly.
-- [ ] **Task Tests:** Check that Celery tasks execute as expected.
+- [x] **Model Tests:** Ensure correct creation and validation of models.
+- [x] **View Tests:** Verify that API endpoints respond correctly.
+- [x] **Task Tests:** Check that Celery tasks execute as expected.
 - [x] **Validator Tests:** Ensure custom validators work as intended.
 
 ---
